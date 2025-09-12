@@ -1,3 +1,7 @@
+## Code:
+
+https://github.com/thecodeholic/Yii2CrashCourse
+
 ## Installation
 
 https://www.yiiframework.com/doc/guide/2.0/ru/start-installation
@@ -9,3 +13,4 @@ https://www.yiiframework.com/doc/guide/2.0/ru/start-installation
     php -S localhost:8080
     (Ctrl+C to quit)
 
+## 
