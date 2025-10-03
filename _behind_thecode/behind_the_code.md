@@ -39,7 +39,16 @@ https://www.yiiframework.com/doc/guide/2.0/ru/start-installation
 
 Таким образом, вход `login` пользователя на основе списка (массива) пользователей заменена на авторизацию на основе пользователей из таблицы `user` БД.  
 
-## 
+## Gii
+
+http://yii2-codeholic-crashcourse/web/gii
+
+Model generator
+
+http://yii2-codeholic-crashcourse/web/gii/model
+
+    table - user
+    model - User
 
 
 
