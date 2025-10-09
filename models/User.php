@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use Yii;
 
 /**
  * This is the model class for table "user".
@@ -107,6 +108,10 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        // проверка пароля напрямую как есть
+        // return $this->password === $password;
+
+        // проверка хэша пароля ($this->password - это хэш)
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 }
