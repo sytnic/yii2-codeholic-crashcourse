@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
-    <?= DetailView::widget([
+    <?php /* // Показывает все поля (данные) статьи
+        DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -37,6 +38,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'created_by',
         ],
-    ]) ?>
+    ]) */ ?>
+
+    <div>
+        <?php  // Показывает только body (текст) статьи
+               // echo Html::encode($model->body);
+               // или то же самое, но с использованием модели Article
+               echo $model->getEncodedBody(); 
+        ?>
+    </div>
+
+
 
 </div>

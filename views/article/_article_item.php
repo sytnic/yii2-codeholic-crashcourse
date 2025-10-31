@@ -8,7 +8,9 @@
     </a>
     <div>
         <?php // echo \yii\helpers\Html::encode($model->body) 
-              echo \yii\helpers\StringHelper::truncateWords(\yii\helpers\Html::encode($model->body), 40);        
+              // echo \yii\helpers\StringHelper::truncateWords(\yii\helpers\Html::encode($model->body), 40);        
+              // или то же самое, но с использованием модели Article
+              echo \yii\helpers\StringHelper::truncateWords($model->getEncodedBody(), 40);      
         ?>
     </div>
     <hr>
