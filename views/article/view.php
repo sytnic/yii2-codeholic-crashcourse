@@ -15,6 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p class="text-muted">
+        <small>Created At:
+            <b> 
+          <?php // Вывод времени создания статьи, по дате создания
+                //echo Yii::$app->formatter->asDatetime($model->created_at); 
+                // Вывод времени создания статьи, как давно создана
+                echo Yii::$app->formatter->asRelativeTime($model->created_at);
+          ?></b>
+          By: <b><?php echo $model->createdBy->username; ?></b>
+        </small>
+    </p>
+
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
