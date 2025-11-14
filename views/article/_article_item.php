@@ -13,6 +13,19 @@
               echo \yii\helpers\StringHelper::truncateWords($model->getEncodedBody(), 40);      
         ?>
     </div>
+    
+    <p class="text-muted text-end">
+        <small>Created At:
+            <b> 
+          <?php // Вывод времени создания статьи, по дате создания
+                //echo Yii::$app->formatter->asDatetime($model->created_at); 
+                // Вывод времени создания статьи, как давно создана
+                echo Yii::$app->formatter->asRelativeTime($model->created_at);
+          ?></b>
+          By: <b><?php echo $model->createdBy->username; ?></b>
+        </small>
+    </p>
+
     <hr>
 </div>
 
