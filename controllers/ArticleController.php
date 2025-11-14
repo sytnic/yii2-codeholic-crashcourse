@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
+use Yii;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -106,6 +108,11 @@ class ArticleController extends Controller
     {
         $model = $this->findModel($slug);
 
+        // Контроль Доступа только к своим статьям, не к чужим
+        if ($model->created_by !== Yii::$app->user->id){
+            throw new ForbiddenHttpException("You do not have permission to update this article");
+        }
+
         /* использовалось при id, теперь slug
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -129,7 +136,15 @@ class ArticleController extends Controller
      */
     public function actionDelete($slug)
     {
-        $this->findModel($slug)->delete();
+        // Эта строка удалена после введения контроля доступа к своим и чужим статьям
+        //$this->findModel($slug)->delete();
+
+        $model = $this->findModel($slug);
+        // Контроль Доступа только к своим статьям, не к чужим
+        if ($model->created_by !== Yii::$app->user->id){
+            throw new ForbiddenHttpException("You do not have permission to delete this article");
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }
