@@ -27,17 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
         </small>
     </p>
 
-    <p>
-        <?php  // id заменены на slug в процессе перехода на slug   ?>
-        <?= Html::a('Update', ['update', 'slug' => $model->slug], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'slug' => $model->slug], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?php if (!Yii::$app->user->isGuest): ?>
+        <p>
+            <?php  // id заменены на slug в процессе перехода на slug   ?>
+            <?= Html::a('Update', ['update', 'slug' => $model->slug], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Delete', ['delete', 'slug' => $model->slug], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>    
+    <?php endif; ?>
 
     <?php /* // Показывает все поля (данные) статьи
         DetailView::widget([
