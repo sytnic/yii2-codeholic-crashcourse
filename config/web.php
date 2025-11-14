@@ -47,6 +47,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                // подготовка к использованию slug вместо id 
+                'article/<action:(index|update|create|delete)>' => 'article/<action>',
+                'article/<slug>' => 'article/view'
             ],
         ],
         

@@ -49,14 +49,14 @@ class ArticleController extends Controller
 
     /**
      * Displays a single Article model.
-     * @param int $id ID
+     * @param $slug (был int $id ID)
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($slug),
         ]);
     }
 
@@ -71,7 +71,7 @@ class ArticleController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'slug' => $model->slug]);
             }
         } else {
             $model->loadDefaultValues();
@@ -85,18 +85,23 @@ class ArticleController extends Controller
     /**
      * Updates an existing Article model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param $slug (был int $id ID)
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($slug)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($slug);
 
+        /* использовалось при id, теперь slug
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
+        */
+        // используется со $slug
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'slug' => $model->slug]);
+        }
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -105,13 +110,13 @@ class ArticleController extends Controller
     /**
      * Deletes an existing Article model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param $slug (был int $id ID)
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($slug)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($slug)->delete();
 
         return $this->redirect(['index']);
     }
@@ -119,13 +124,13 @@ class ArticleController extends Controller
     /**
      * Finds the Article model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
+     * @param $slug (был int $id ID)
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($slug)
     {
-        if (($model = Article::findOne(['id' => $id])) !== null) {
+        if (($model = Article::findOne(['slug' => $slug])) !== null) {
             return $model;
         }
 
