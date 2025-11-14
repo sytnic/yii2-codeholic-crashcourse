@@ -40,6 +40,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+            // Если нужно использовать маршрут по умолчанию default, то
+            //['label' => 'Home', 'url' => [Yii::$app->defaultRoute]],
+            // или
+            //['label' => 'Home', 'url' => [Yii::$app->homeUrl]],
+
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             // Ссылка меню Login/Logout
