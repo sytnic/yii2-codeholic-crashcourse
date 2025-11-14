@@ -7,6 +7,7 @@ use app\models\ArticleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -18,9 +19,21 @@ class ArticleController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
+        return 
             [
+                // Добавление Контроля доступа для неавторизованных пользователей
+                [
+                    'class' => AccessControl::class,
+                    'only' => ['create','update','delete'],
+                    'rules' => [
+                        [
+                            'actions' => ['update','create','delete'],
+                            'allow' => true,
+                            'roles' => ['@'],
+                        ],
+                    ],
+                ],
+
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -28,7 +41,7 @@ class ArticleController extends Controller
                     ],
                 ],
             ]
-        );
+        ;
     }
 
     /**
